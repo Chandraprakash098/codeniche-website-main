@@ -1788,10 +1788,10 @@ const Header = () => {
 
   const navItems = [
     { to: "/", label: "Home", end: true },
-    { to: "/about", label: "About" },
     { to: "/services", label: "Services" },
     { to: "/products", label: "Products" },
     { to: "/portfolio", label: "Portfolio" },
+     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" }
   ];
 
@@ -1816,7 +1816,7 @@ const Header = () => {
               </LogoIcon>
               <LogoText>
                 <LogoTitle>CodeNiche </LogoTitle>
-                <LogoSubtitle>Sofstudio PVT LTD</LogoSubtitle>
+                <LogoSubtitle>Softstudio PVT LTD</LogoSubtitle>
               </LogoText>
             </LogoContainer>
           </LogoWrapper>
