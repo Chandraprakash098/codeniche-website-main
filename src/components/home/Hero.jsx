@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../common/Button";
-import softwareTeamImage from "../../assets/images/sideimg1.webp";
+import softwareTeamImage from "../../assets/images/sideimg2.webp";
 import { Helmet } from "react-helmet";
 
 const HeroSection = styled.section`
@@ -640,7 +640,7 @@ const Hero = () => {
         <DesktopContent>
           
           <HeroTitle>
-            Innovative <span>Software Solutions</span> for Modern Businesses
+            Building Software That <span>Moves Mountains</span> Daily
           </HeroTitle>
 
           <HeroSubtitle>
@@ -686,7 +686,7 @@ const Hero = () => {
       <MobileContainer>
         <MobileContentTop>
           <HeroTitle>
-            Innovative <span>Software Solutions</span> for Modern Businesses
+            Building Software That <span>Moves Mountains</span> Daily
           </HeroTitle>
 
           <HeroSubtitle>
@@ -735,4 +735,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
 

@@ -35,7 +35,7 @@ import {
   blogPosts,
 } from "../data/homeData";
 
-// Enhanced theme with better contrast and accessibility
+
 const lightTheme = {
   colors: {
     primary: "#2563EB", // Vibrant blue
