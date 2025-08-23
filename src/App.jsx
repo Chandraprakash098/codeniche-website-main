@@ -17,6 +17,8 @@ import Portfolio from './pages/PortfolioPage'
 import Contact from './pages/ContactPage'
 import { theme } from "./styles/theme";
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+import PrivacyPolicy from './pages/privacy';
+import TermsOfService from './pages/terms';
 
 function AppContent() {
   const { mode } = useTheme();
@@ -47,6 +49,8 @@ function AppContent() {
           <Route path="contact" element={<Contact/>} />
           {/* <Route path="careers" element={<Careers />} /> */}
           {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="privacy" element={<PrivacyPolicy/>} />
+          <Route path="terms" element={<TermsOfService/>} />
         </Route>
       </Routes>
     </StyledThemeProvider>

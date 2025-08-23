@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import styled, { ThemeProvider } from "styled-components";
 import { motion, useAnimation } from "framer-motion";
-import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
+import { FaArrowRight, FaCheckCircle,FaArrowLeft } from "react-icons/fa";
 import { IoMdQuote } from "react-icons/io";
 import { AiFillStar } from "react-icons/ai";
 import mob from "../assets/images/mobimg1.png";
@@ -492,6 +492,71 @@ const TestimonialSliderWrapper = styled(motion.div)`
   padding: 1rem 0;
 `;
 
+const NavigationButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.colors.cardBackground};
+  color: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.lightGray};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: ${({ theme }) => theme.shadows.medium};
+  transition: all ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.white};
+    transform: translateY(-50%) scale(1.05);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:hover {
+      background: ${({ theme }) => theme.colors.cardBackground};
+      color: ${({ theme }) => theme.colors.primary};
+      transform: translateY(-50%);
+    }
+  }
+  
+  &.prev {
+    left: 10px;
+  }
+  
+  &.next {
+    right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    
+    &.prev {
+      left: 5px;
+    }
+    
+    &.next {
+      right: 5px;
+    }
+  }
+`;
+
+
+const TestimonialCardsContainer = styled(motion.div)`
+  display: flex;
+  width: 100%;
+  padding: 0 1rem;
+`;
+
+
 const TestimonialCard = styled(motion.div)`
   background-color: ${({ theme }) => theme.colors.cardBackground};
   border-radius: ${({ theme }) => theme.borderRadius.large};
@@ -657,6 +722,7 @@ const Home = () => {
   const { mode } = useTheme();
   const controls = useAnimation();
   const sliderRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
   const renderRatingStars = (rating) => {
@@ -664,6 +730,32 @@ const Home = () => {
     return Array.from({ length: validRating }, (_, i) => (
       <AiFillStar key={i} />
     ));
+  };
+
+
+  const scrollToSlide = (index) => {
+    if (sliderRef.current) {
+      const slideWidth = sliderRef.current.children[0]?.offsetWidth || 0;
+      const margin = parseInt(getComputedStyle(sliderRef.current.children[0]).marginRight) || 0;
+      const totalWidth = slideWidth + margin * 2;
+      sliderRef.current.scrollTo({
+        left: index * totalWidth,
+        behavior: 'smooth'
+      });
+      setCurrentSlide(index);
+    }
+  };
+
+  const nextSlide = () => {
+    if (currentSlide < testimonials.length - 1) {
+      scrollToSlide(currentSlide + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentSlide > 0) {
+      scrollToSlide(currentSlide - 1);
+    }
   };
 
   useEffect(() => {
@@ -906,63 +998,78 @@ const Home = () => {
           </motion.div>
         </StatsSection>
 
-        {/* Testimonials Section */}
+        
+
+
         <CompactSection id="testimonials" bgColor="gray">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={fadeInUp}
-          >
-            <SectionHeading
-              subHeading="Client Testimonials"
-              heading="What Our Clients Say"
-              description="Hear from businesses that have transformed with our solutions"
-              align="center"
-              compact
-            />
-            <SectionDivider />
-            <TestimonialSliderWrapper
-              onMouseEnter={handlePause}
-              onMouseLeave={handleResume}
-              onTouchStart={handlePause}
-              onTouchEnd={handleResume}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={fadeInUp}
+        >
+          <SectionHeading
+            subHeading="Client Testimonials"
+            heading="What Our Clients Say"
+            description="Hear from businesses that have transformed with our solutions"
+            align="center"
+            compact
+          />
+          <SectionDivider />
+          <TestimonialSliderWrapper>
+            <NavigationButton 
+              className="prev" 
+              onClick={prevSlide}
+              disabled={currentSlide === 0}
+              aria-label="Previous testimonial"
             >
-              <motion.div
-                ref={sliderRef}
-                animate={controls}
-                initial={{ x: 0 }}
-                style={{ display: "flex" }}
-              >
-                {[...testimonials, ...testimonials].map((testimonial, index) => {
-                  const initial = getInitial(testimonial.name);
-                  const bgColor = getColorFromInitial(initial);
-                  return (
-                    <TestimonialCard
-                      key={`${testimonial.id}-${index}`}
-                      variants={fadeInUp}
-                    >
-                      <IoMdQuote className="quote-icon" />
-                      <TestimonialContent>{testimonial.text}</TestimonialContent>
-                      <TestimonialAuthor>
-                        <AuthorAvatar bgColor={bgColor}>{initial}</AuthorAvatar>
-                        <AuthorInfo>
-                          <h4>{testimonial.name}</h4>
-                          <p>
-                            {testimonial.position}, {testimonial.company}
-                          </p>
-                          <RatingStars>
-                            {renderRatingStars(testimonial.rating)}
-                          </RatingStars>
-                        </AuthorInfo>
-                      </TestimonialAuthor>
-                    </TestimonialCard>
-                  );
-                })}
-              </motion.div>
-            </TestimonialSliderWrapper>
-          </motion.div>
-        </CompactSection>
+              <FaArrowLeft />
+            </NavigationButton>
+            
+            <TestimonialCardsContainer
+              ref={sliderRef}
+              style={{ overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {testimonials.map((testimonial, index) => {
+                const initial = getInitial(testimonial.name);
+                const bgColor = getColorFromInitial(initial);
+                return (
+                  <TestimonialCard
+                    key={testimonial.id}
+                    variants={fadeInUp}
+                  >
+                    <IoMdQuote className="quote-icon" />
+                    <TestimonialContent>{testimonial.text}</TestimonialContent>
+                    <TestimonialAuthor>
+                      <AuthorAvatar bgColor={bgColor}>{initial}</AuthorAvatar>
+                      <AuthorInfo>
+                        <h4>{testimonial.name}</h4>
+                        <p>
+                          {testimonial.position}, {testimonial.company}
+                        </p>
+                        <RatingStars>
+                          {renderRatingStars(testimonial.rating)}
+                        </RatingStars>
+                      </AuthorInfo>
+                    </TestimonialAuthor>
+                  </TestimonialCard>
+                );
+              })}
+            </TestimonialCardsContainer>
+            
+            <NavigationButton 
+              className="next" 
+              onClick={nextSlide}
+              disabled={currentSlide === testimonials.length - 1}
+              aria-label="Next testimonial"
+            >
+              <FaArrowRight />
+            </NavigationButton>
+          </TestimonialSliderWrapper>
+        </motion.div>
+      </CompactSection>
+        
+
 
         {/* Clients Section */}
         <CompactSection id="clients">
@@ -995,3 +1102,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
