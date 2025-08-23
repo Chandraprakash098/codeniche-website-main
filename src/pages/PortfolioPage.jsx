@@ -29,13 +29,13 @@ import Chatbot from "../components/common/Chatbot";
 import FloatingActionButtons from "../components/common/FloatingActionButtons";
 
 // Assets
-import optima from "../assets/images/opimg.png";
-import hospital from "../assets/images/hosman.png";
-import expense from "../assets/images/exp1.png";
-import library from '../assets/images/library.png'
-import gaushala from '../assets/images/gaushala.png'
-import school from '../assets/images/school.png'
-import bike from '../assets/images/bike.png'
+import optima from "../assets/images/opimg.webp";
+// import hospital from "../assets/images/hosman.png";
+import expense from "../assets/images/exp1.webp";
+import library from '../assets/images/library.webp'
+import gaushala from '../assets/images/gaushala.webp'
+import school from '../assets/images/school.webp'
+import bike from '../assets/images/bike.webp'
 
 // Animations
 const floatAnimation = keyframes`
