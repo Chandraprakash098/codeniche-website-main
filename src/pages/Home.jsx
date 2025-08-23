@@ -813,21 +813,21 @@ const Home = () => {
         <meta property="og:title" content="CodeNiche SoftStudio | Innovative Software Solutions" />
         <meta property="og:description" content="Transform your business with our custom software solutions, web applications, and mobile apps tailored to your needs." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://codenichesoftstudio.com" />
-        <meta property="og:image" content="https://codenichesoftstudio.com/og-image.jpg" />
+        <meta property="og:url" content="https://www.codenichesoftstudio.com" />
+        <meta property="og:image" content="https://www.codenichesoftstudio.com/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="CodeNiche SoftStudio | Innovative Software Solutions" />
         <meta name="twitter:description" content="Transform your business with our custom software solutions, web applications, and mobile apps tailored to your needs." />
-        <meta name="twitter:image" content="https://codenichesoftstudio.com/twitter-card.jpg" />
-        <link rel="canonical" href="https://codenichesoftstudio.com" />
+        <meta name="twitter:image" content="https://www.codenichesoftstudio.com/twitter-card.jpg" />
+        <link rel="canonical" href="https://www.codenichesoftstudio.com" />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "CodeNiche SoftStudio",
-              "url": "https://codenichesoftstudio.com",
-              "logo": "https://codenichesoftstudio.com/logo.png",
+              "url": "https://www.codenichesoftstudio.com",
+              "logo": "https://www.codenichesoftstudio.com/logo.png",
               "description": "Innovative software solutions and development services",
               "offers": {
                 "@type": "Offer",
