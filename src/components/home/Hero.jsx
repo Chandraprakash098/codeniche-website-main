@@ -345,8 +345,8 @@ const ImageOverlay = styled.div`
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 4.2rem;
-  font-weight: 800;
+  font-size: 3.7rem;
+  font-weight: 730;
   margin-bottom: 1.5rem;
   line-height: 1.1;
   background: linear-gradient(90deg, #1a1a1a 0%, #2a7687 100%);
