@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { forwardRef } from 'react'; // Add this import
 
 const CardContainer = styled.div`
   background-color: ${({ theme, bgColor }) => bgColor ? bgColor : theme.colors.light};
@@ -32,28 +33,45 @@ const CardFooter = styled.div`
   align-items: center;
 `
 
-const Card = ({
-  children,
-  bgColor,
-  elevation = 'low',
-  hover,
-  height,
-  className,
-  ...props
-}) => {
+// const Card = ({
+//   children,
+//   bgColor,
+//   elevation = 'low',
+//   hover,
+//   height,
+//   className,
+//   ...props
+// }) => {
+//   return (
+//     <CardContainer 
+//       bgColor={bgColor}
+//       elevation={elevation}
+//       hover={hover}
+//       height={height}
+//       className={className}
+//       {...props}
+//     >
+//       {children}
+//     </CardContainer>
+//   )
+// }
+
+
+const Card = forwardRef(({ children, bgColor, elevation = 'low', hover, height, className, ...props }, ref) => {
   return (
     <CardContainer 
-      bgColor={bgColor}
-      elevation={elevation}
-      hover={hover}
-      height={height}
+      $bgColor={bgColor} // Use transient props
+      $elevation={elevation}
+      $hover={hover}
+      $height={height}
       className={className}
+      ref={ref}
       {...props}
     >
       {children}
     </CardContainer>
-  )
-}
+  );
+});
 
 Card.Header = CardHeader
 Card.Body = CardBody

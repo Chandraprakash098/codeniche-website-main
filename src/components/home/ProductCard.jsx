@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion,useInView } from 'framer-motion'
 import { FaArrowRight } from 'react-icons/fa'
 import Card from '../common/Card'
+import { useRef } from 'react';
 
 const ProductCardWrapper = styled(motion(Card))`
   overflow: hidden;
@@ -88,14 +89,41 @@ const ProductLink = styled(Link)`
   }
 `
 
+// const ProductCard = ({ product }) => {
+//   return (
+//     <ProductCardWrapper
+//       elevation="medium"
+//       initial={{ opacity: 0, y: 30 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.5 }}
+//       viewport={{ once: true }}
+//     >
+//       <ProductImage>
+//         <img src={product.image || "/api/placeholder/600/400"} alt={product.title} />
+//       </ProductImage>
+//       <ProductContent>
+//         <ProductTitle>{product.title}</ProductTitle>
+//         <ProductDescription>{product.description}</ProductDescription>
+//         <ProductLink to={product.link || "#"}>
+//           Learn More <FaArrowRight />
+//         </ProductLink>
+//       </ProductContent>
+//     </ProductCardWrapper>
+//   )
+// }
+
+
 const ProductCard = ({ product }) => {
+  const ref = useRef(null); // Add ref
+  const isInView = useInView(ref, { once: true }); // Use useInView to control animation
+
   return (
     <ProductCardWrapper
+      ref={ref}
       elevation="medium"
       initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
     >
       <ProductImage>
         <img src={product.image || "/api/placeholder/600/400"} alt={product.title} />
@@ -108,7 +136,7 @@ const ProductCard = ({ product }) => {
         </ProductLink>
       </ProductContent>
     </ProductCardWrapper>
-  )
-}
+  );
+};
 
 export default ProductCard
