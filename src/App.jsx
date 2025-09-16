@@ -44,11 +44,8 @@ function AppContent() {
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
           <Route path="products" element={<Products />} />
-          {/* <Route path="schoolvriksh" element={<SchoolVriksh />} /> */}
           <Route path="portfolio" element={<Portfolio />} />
           <Route path="contact" element={<Contact/>} />
-          {/* <Route path="careers" element={<Careers />} /> */}
-          {/* <Route path="*" element={<NotFound />} /> */}
           <Route path="privacy" element={<PrivacyPolicy/>} />
           <Route path="terms" element={<TermsOfService/>} />
         </Route>
